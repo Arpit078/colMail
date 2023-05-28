@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"electron ."
+
+  },
+  "author": "Arpit078",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.4.0"
+  }, 
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "base64url": "^3.0.1",
+    "googleapis": "^105.0.0",
+    "nodemailer": "^6.9.2"
+  }
+}
