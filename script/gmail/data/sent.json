@@ -1,0 +1,54 @@
+[
+  {
+    "date": "30-05-2023",
+    "data": {
+      "id": "r-2558656839267938614",
+      "message": {
+        "id": "18868efcdcb8101c",
+        "threadId": "18868efcdcb8101c",
+        "labelIds": [
+          "DRAFT"
+        ]
+      }
+    }
+  },
+  {
+    "date": "30-05-2023",
+    "data": {
+      "id": "r-2359159669679024140",
+      "message": {
+        "id": "18868efd5dab6f5b",
+        "threadId": "18868efd5dab6f5b",
+        "labelIds": [
+          "DRAFT"
+        ]
+      }
+    }
+  },
+  {
+    "date": "30-05-2023",
+    "data": {
+      "id": "r6119812467376644998",
+      "message": {
+        "id": "18868fa11473aa15",
+        "threadId": "18868fa11473aa15",
+        "labelIds": [
+          "DRAFT"
+        ]
+      }
+    }
+  },
+  {
+    "date": "30-05-2023",
+    "data": {
+      "id": "r-8113631543045056422",
+      "message": {
+        "id": "18868fa195e89523",
+        "threadId": "18868fa195e89523",
+        "labelIds": [
+          "DRAFT"
+        ]
+      }
+    }
+  }
+]

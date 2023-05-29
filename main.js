@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
-const {sendMail,authorize} = require("./gmail.js")
+const {sendMail,authorize,mailsToday} = require("./script/gmail/gmail.js")
 
 async function handleFileOpen () {
   const { canceled, filePaths } = await dialog.showOpenDialog()

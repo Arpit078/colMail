@@ -74,15 +74,17 @@ async function authorize() {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 
-//-------edit this block for custom mail and recipient---------//
-// const recipient = "verma.arpit078@gmail.com"
-// const subject = "Regarding this mails's visibility"
-// const message = "I would like to know if this mail is visible in the regular inbox, feel free to reply with the status."
-//--------------------------------------------------------------//
-
-
-
-
+async function updateData(label){
+  const datafilePath = "./script/gmail/data/sent.json"
+  try {
+    const data = await fs.readFile(datafilePath, 'utf8');
+    let jsonData = JSON.parse(data);
+    jsonData.push(label);
+    await fs.writeFile(datafilePath, JSON.stringify(jsonData, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Error:', err);
+  }
+} 
 
 async function sendMailSingle(auth,recipient,subject,message,filename,path) {
   const gmail = google.gmail({version: 'v1', auth});
@@ -107,8 +109,18 @@ async function sendMailSingle(auth,recipient,subject,message,filename,path) {
   //     id: draftRes.data.id,
   //   }
   // });
-  const labels = draftRes.data;
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${day}-${month}-${year}`;//29-05-2023
+
+  const labels = {
+    date : formattedDate,
+    data: draftRes.data
+  };
   console.log(labels)
+  await updateData(labels)  
   await fs.unlink("./email.eml",()=>{console.log("deleted email.eml")}) 
 }
 
@@ -119,4 +131,23 @@ async function sendMail(auth,recipientArr,subject,message,fileName,path){
 }
 
 
-module.exports = { sendMail,authorize }
+async function mailsToday(){
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${day}-${month}-${year}`;//29-05-2023
+  const data = await fs.readFile("./script/gmail/data/sent.json", 'utf8');
+  let jsonData = JSON.parse(data);
+  let count =0
+  for(let i=0;i<jsonData.length;i++){
+    if(jsonData[i].date===formattedDate){
+      count+=1
+    }
+  }
+  console.log(count)
+  return count
+
+}
+
+module.exports = { sendMail,authorize,mailsToday }
