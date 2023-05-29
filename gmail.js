@@ -84,7 +84,7 @@ async function authorize() {
 
 
 
-async function sendMail(auth,recipient,subject,message,filename,path) {
+async function sendMailSingle(auth,recipient,subject,message,filename,path) {
   const gmail = google.gmail({version: 'v1', auth});
   const attachment = await createEmlWithAttachment(recipient,subject,message,filename,path)
 //-------------------drafting the mail.---------------------//
@@ -109,7 +109,13 @@ async function sendMail(auth,recipient,subject,message,filename,path) {
   // });
   const labels = draftRes.data;
   console.log(labels)
-  fs.unlink("./email.eml",()=>{console.log("deleted email.eml")}) 
+  await fs.unlink("./email.eml",()=>{console.log("deleted email.eml")}) 
+}
+
+async function sendMail(auth,recipientArr,subject,message,fileName,path){
+  for(let i=0;i<recipientArr.length;i++){
+    await sendMailSingle(auth,recipientArr[i],subject,message,fileName,path)
+  }
 }
 
 

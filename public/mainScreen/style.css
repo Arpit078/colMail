@@ -16,6 +16,8 @@ body{
     height: 100vh;
     background-color: #FFFEFE;
     display: grid;
+    grid-template-columns: repeat(8, 1fr); /* Set a fixed number of rows */
+    grid-auto-columns: 8%; 
 }
 
 .mailIds{

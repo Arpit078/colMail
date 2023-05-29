@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="style.css">
     <title>Dialog</title>
   </head>
   <body>
     <div class="container">
       <div id="menu"></div>
       <div id="content">
-        <div class="mailIds">
-          <input type="text" placeholder="receipient" class="receipient">
+        <div class="mailIds" id="mailIds">
+          <div id="mailBox">
+            <input type="text" placeholder="Receipient" class="receipient">
+          </div>
           <button id="add-receipient">add</button>
+          <button id="lock-list">lock list</button>
         </div>
         <div class="mailContainer">
-          <input type="text" id="to" placeholder="to">
           <input type="text" id="subject" placeholder="subject">
-          <input type="text" id="message" placeholder="message">
+          <textarea id="message" placeholder="message" rows="4" cols="50"></textarea>
           <input type="text" id="filename" placeholder="file name">
           <button type="button" id="btn">Open a File</button>
           <button id="send">send</button>
