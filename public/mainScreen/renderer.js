@@ -8,9 +8,40 @@ const filename = document.getElementById('filename')
 const addReceipient = document.getElementById('add-receipient')
 const mailBox = document.getElementById('mailBox')
 const lockList = document.getElementById('lock-list')
+const mailCounterdiv = document.getElementById('mailCounter')
 let filePath
 let recipientValuesGlobal
 
+function updateCount(mailCounterdiv){
+  window.electronAPI.mailCount().then((res)=>{
+    mailCounterdiv.innerText = res
+  })  
+}
+
+updateCount(mailCounterdiv)
+
+
+async function sendDataAndWait(data) {
+  return new Promise((resolve, reject) => {
+    window.electronAPI.sendData(data, (error, res) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+}
+
+async function sendMailAndCount(data) {
+  try {
+    await sendDataAndWait(data);
+    // updateCount(mailCounterdiv);
+    console.log("added");
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
 addReceipient.addEventListener('click', ()=>{
     const inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
@@ -33,10 +64,7 @@ btn.addEventListener('click', async () => {
   console.log(filePathvar)
   filePath = filePathvar
 })
-async function sendDataAndWait(data) {
-  await window.electronAPI.sendData(data);
-  // Code that depends on the completion of sendData
-}
+
 
 send.addEventListener('click',async ()=>{
     const data = {
@@ -47,6 +75,6 @@ send.addEventListener('click',async ()=>{
       filePath : result = typeof filePath !== 'undefined' ? filePath : ""
     }
     console.log(data)
-    await sendDataAndWait(data).then(
-      window.electronAPI.handleMessage((event, value) => {console.log(value)}))
+    sendMailAndCount(data);
+  
 })

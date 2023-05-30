@@ -1,0 +1,14 @@
+[
+  {
+    "date": "30-05-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail:Update",
+    "data": {
+      "id": "1886cfa9a6ff86ec",
+      "threadId": "1886cfa98d0eedd8",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  }
+]
