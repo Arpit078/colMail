@@ -9,9 +9,10 @@
 - [x] integrate the analytics with the frontend.
 - [x] implement functional ui.
 # 31-05-23
-- [ ] desing on figma.
-- [ ] implement the figma design.
-- [ ] work on the side menu.
+- [x] work on the side menu.
+- [x] implement the figma design.
+# 01-06-23
+- [ ] implement email import from google sheets.
 - [ ] create the reminder tab.
 - [ ] about screen.
 - [ ] onboarding.

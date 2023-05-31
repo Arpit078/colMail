@@ -11,6 +11,14 @@ const lockList = document.getElementById('lock-list')
 const mailCounterdiv = document.getElementById('mailCounter')
 const reminderCounterdiv = document.getElementById('reminderCounter')
 const refreshbtn = document.getElementById('refresh')
+const minimize = document.getElementById('minimize')
+const icons = document.querySelectorAll('.icon')
+const menuBox = document.getElementById('menu')
+const expanded = document.querySelectorAll('.expanded');
+const items = document.querySelectorAll('.item');
+
+
+
  
 let filePath
 let recipientValuesGlobal
@@ -34,7 +42,7 @@ async function reminderCount(reminderCounterdiv){
 }
 
 updateCount(mailCounterdiv)
-reminderCount(reminderCounterdiv)
+// reminderCount(reminderCounterdiv)
 /*
 refreshbtn.addEventListener('click', ()=>{
     reminderCounterdiv.innerHTML =  reminderCount()
@@ -62,15 +70,38 @@ async function sendMailAndCount(data) {
     console.error("An error occurred:", error);
   }
 }
+
+//------------------------------button functions--------------------------------------------------------------
+
 addReceipient.addEventListener('click', ()=>{
     const inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
-    inputElement.setAttribute("placeholder", "Receipient");
+    inputElement.setAttribute("placeholder", "Recipient");
     inputElement.setAttribute("class", "receipient");
     mailBox.appendChild(inputElement);
    
 })
-// 
+minimize.addEventListener('click', ()=>{
+  expanded.forEach(box => {
+  box.style.display = 'none';
+});
+  menuBox.style.width = "5%"
+  minimize.innerText = ""
+  
+
+})
+
+items.forEach((item)=>{
+  item.addEventListener('click',()=>{
+    minimize.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+  </svg>`
+    menuBox.style.width = "15%"
+    expanded.forEach(box => {
+      box.style.display = 'block';
+    });
+  })
+})
 
 lockList.addEventListener('click',()=>{
   const recipientInputs = document.querySelectorAll('input.receipient');
@@ -99,3 +130,4 @@ send.addEventListener('click',async ()=>{
     sendMailAndCount(data);
   
 })
+//-----------------------------------------------------------------------------------------------------------------------

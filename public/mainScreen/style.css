@@ -4,20 +4,42 @@ body{
 .container{
     display: flex;
     flex-direction: row;
+    font-family: 'Rubik', sans-serif;
+}
+.container input{
+    border: none;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.27);
+    margin-bottom: 10px ;
+    outline: none;
+
+}
+.container textarea{
+    border: none;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.27);
+    margin-bottom: 10px ;
+
 
 }
 #menu{
     width: 5%;
     height: 100vh;
     background-color: rgb(245, 245, 253);
+    font-weight: 500;
 }
 #content{
     width: 95%;
-    height: 100vh;
+    height:auto;
     background-color: #FFFEFE;
     display: grid;
     grid-template-columns: repeat(8, 1fr); /* Set a fixed number of rows */
     grid-auto-columns: 8%; 
+    border: 1.5px solid rgba(0, 0, 0, 0.197);
+    border-radius: 10px;
+    margin: 1rem;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 20;
 }
 
 .mailIds{
@@ -26,8 +48,32 @@ body{
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 20;
-    border: 1px solid black;
     padding: 1rem;
+    border-right: 1.5px solid rgba(0, 0, 0, 0.27);
+    margin-bottom: 1rem;
+    position: relative ;
+
+
+}
+.btns{
+    position: absolute;
+    bottom: 0;
+}
+.file{
+    display: flex;
+    justify-content: space-between;
+}
+#send{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: #7E65B3;
+    font-weight: 500;
+    color: white;
+    border-radius: 1rem;
+    cursor: pointer;
 
 }
 .mailContainer{
@@ -36,21 +82,90 @@ body{
     grid-column-end:10;
     grid-row-start: 2;
     grid-row-end: 20;
-    border: 1px solid black;
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+
+}
+#message{
+    font-family: 'Rubik', sans-serif;
+    resize: none;
+    outline: none;
+}
+#btn{
+    border: none;
+    border-bottom: 5px solid grey;
+    background-color: grey;
+    border-radius: 5px 5px 10px 10px;
+    color: white;
+    cursor: pointer;
+}
+.idBtn{
+    border: none;
+    padding: 8px 12px 8px 12px;
+    background-color: #b36d65;
+    font-weight: 500;
+    color: white;
+    border-radius: 1rem;
+    cursor: pointer;
 }
 
+
+.contentWrapper{
+    display: grid;
+    width: 95%;
+}
+
+.item{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 7px 5px 7px 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 1rem;
+}
+.item:hover{
+    background-color: #EEECF9;
+}
+.item:hover .expanded{
+    color: #2C2A35;
+}
+.item:hover .icon{
+    color: #7E65B3;
+}
+#minimize{
+    cursor: pointer;
+}
+
+.minimizeContainer{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+}
+.expanded{
+    color: #8B8EA2;
+}
+
+.heading{
+    font-weight: 500;
+    font-size: 2rem;
+    color: #2C2A35;
+}
 .top{
+    margin-left: 1rem;
+    color: #8B8EA2;
+    grid-column-start: 1;
+    grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
-    grid-column-start:1;
-    grid-column-end:10;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border: 1px solid black;
 }
+.top p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
