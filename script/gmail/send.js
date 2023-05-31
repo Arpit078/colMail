@@ -92,7 +92,6 @@ async function mailsToday(){
       count+=1
     }
   }
-  // console.log(count)
   return count
 
 }

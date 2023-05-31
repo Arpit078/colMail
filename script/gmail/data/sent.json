@@ -22,5 +22,103 @@
         "SENT"
       ]
     }
+  },
+  {
+    "date": "30-05-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail:Reminder",
+    "data": {
+      "id": "1886d58a23edc652",
+      "threadId": "1886d58a1ddf0b35",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "30-05-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "Sorry to let you go",
+    "data": {
+      "id": "1886d6495d7eec3a",
+      "threadId": "1886d6491b3bceb3",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "colMail : 1st draft",
+    "data": {
+      "id": "1886e3f40b8df7b2",
+      "threadId": "1886e3f3f56d3de5",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "colMail:firstDraft",
+    "data": {
+      "id": "1886e483b670d832",
+      "threadId": "1886e483775f8689",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "2021eeb1156@iitrpr.ac.in",
+    "subject": "colMail:firstDraft",
+    "data": {
+      "id": "1886e484764139f7",
+      "threadId": "1886e4844e8c9dcf",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail:firstDraft",
+    "data": {
+      "id": "1886e4853f23f73f",
+      "threadId": "1886e484e15cd90a",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "arpit078.dev@gmail.com",
+    "subject": "colMail:firstDraft",
+    "data": {
+      "id": "1886e485d03a3be7",
+      "threadId": "1886e48588fd22e3",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ]
+    }
+  },
+  {
+    "date": "31-05-2023",
+    "recipient": "server1078@outlook.com",
+    "subject": "colMail:firstDraft",
+    "data": {
+      "id": "1886e4866fa6cc0c",
+      "threadId": "1886e486546ef898",
+      "labelIds": [
+        "SENT"
+      ]
+    }
   }
 ]

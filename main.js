@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
-const {sendMail,authorize,mailsToday} = require("./script/gmail/send.js")
+const {sendMail,mailsToday} = require("./script/gmail/send.js")
+const {reminder} = require("./script/gmail/reminder.js")
 
 async function handleFileOpen () {
   const { canceled, filePaths } = await dialog.showOpenDialog()
@@ -11,9 +12,9 @@ async function handleFileOpen () {
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
     }
   })
   ipcMain.on('receiveData', async (event, data) => {
@@ -34,6 +35,7 @@ function createWindow () {
 app.whenReady().then(() => {
   ipcMain.handle('dialog:openFile', handleFileOpen)
   ipcMain.handle('mail-count',mailsToday)
+  ipcMain.handle('reminder-count',reminder)
   createWindow()
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()

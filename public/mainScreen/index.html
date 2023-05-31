@@ -5,13 +5,16 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <link rel="stylesheet" href="style.css">
-    <title>Dialog</title>
+    <title>colMail</title>
   </head>
   <body>
     <div class="container">
       <div id="menu"></div>
       <div id="content">
-        <div id="mailCounter"></div>
+        <div class="top">  
+          <div >Todays mail count : <span id="mailCounter"></span></div>
+          <div >Reminder mails to be sent : <span id="reminderCounter"></span></div>
+        </div>
         <div class="mailIds" id="mailIds">
           <div id="mailBox">
             <input type="text" placeholder="Receipient" class="receipient">

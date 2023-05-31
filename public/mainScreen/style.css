@@ -21,16 +21,36 @@ body{
 }
 
 .mailIds{
-    background-color: blue;
+    /* background-color: blue; */
     grid-column-start: 1;
     grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 10;
+    grid-row-start: 2;
+    grid-row-end: 20;
+    border: 1px solid black;
+    padding: 1rem;
+
 }
 .mailContainer{
-    background-color: rgb(65, 12, 71);
+    /* background-color: rgb(65, 12, 71); */
     grid-column-start:4;
     grid-column-end:10;
+    grid-row-start: 2;
+    grid-row-end: 20;
+    border: 1px solid black;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
     grid-row-start: 1;
-    grid-row-end: 10;
+    grid-row-end: 2;
+    grid-column-start:1;
+    grid-column-end:10;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 1px solid black;
 }

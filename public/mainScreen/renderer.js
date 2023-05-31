@@ -9,17 +9,37 @@ const addReceipient = document.getElementById('add-receipient')
 const mailBox = document.getElementById('mailBox')
 const lockList = document.getElementById('lock-list')
 const mailCounterdiv = document.getElementById('mailCounter')
+const reminderCounterdiv = document.getElementById('reminderCounter')
+const refreshbtn = document.getElementById('refresh')
+ 
 let filePath
 let recipientValuesGlobal
 
-function updateCount(mailCounterdiv){
-  window.electronAPI.mailCount().then((res)=>{
-    mailCounterdiv.innerText = res
+async function updateCount(mailCounterdiv){
+  const count = window.electronAPI.mailCount().then((res)=>{
+    console.log(res)
+    mailCounterdiv.innerHTML = res
+    return res
   })  
+  return count
+}
+
+async function reminderCount(reminderCounterdiv){
+  const count = window.electronAPI.reminderCount().then((res)=>{
+    console.log(res)
+    reminderCounterdiv.innerHTML=res
+    return res
+  }) 
+  return count 
 }
 
 updateCount(mailCounterdiv)
-
+reminderCount(reminderCounterdiv)
+/*
+refreshbtn.addEventListener('click', ()=>{
+    reminderCounterdiv.innerHTML =  reminderCount()
+})
+*/
 
 async function sendDataAndWait(data) {
   return new Promise((resolve, reject) => {
@@ -50,6 +70,7 @@ addReceipient.addEventListener('click', ()=>{
     mailBox.appendChild(inputElement);
    
 })
+// 
 
 lockList.addEventListener('click',()=>{
   const recipientInputs = document.querySelectorAll('input.receipient');

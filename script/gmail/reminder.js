@@ -12,10 +12,13 @@ async function reminderMediary(data,arr) {
     id: data.data.threadId,
     userId: 'me',
   });
-  console.log(thread.data.messages)
-  if(thread.data.messages.length==1){
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${day}-${month}-${year}`;//29-05-2023
+  if(thread.data.messages.length==1 && data.date != formattedDate){
     arr.push(data)
-    console.log("written")
   }
 }
 
@@ -26,12 +29,12 @@ async function reminder(){
   const reminderfilePath = "./script/gmail/data/remind.json"
   const data = await fs.readFile(sentfilePath, 'utf8',()=>console.error());
   let jsonData = JSON.parse(data);
-  console.log(jsonData)
   let arr=[]
   for(let i=0;i<jsonData.length;i++){
     await reminderMediary(jsonData[i],arr)
   }
   await fs.writeFile(reminderfilePath, JSON.stringify(arr, null, 2), 'utf8');
+  return arr.length
 }
 
 module.exports = {reminder}

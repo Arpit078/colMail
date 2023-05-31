@@ -10,5 +10,17 @@
         "SENT"
       ]
     }
+  },
+  {
+    "date": "30-05-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail:Reminder",
+    "data": {
+      "id": "1886d58a23edc652",
+      "threadId": "1886d58a1ddf0b35",
+      "labelIds": [
+        "SENT"
+      ]
+    }
   }
 ]
