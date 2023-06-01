@@ -1,19 +1,20 @@
 const fs = require('fs').promises;
 const {google} = require('googleapis');
 const {createEmlWithAttachment} = require('./eml.js')
-const {authorize} = require('./auth.js')
+const {authorize} = require('./auth.js');
+const { file } = require('googleapis/build/src/apis/file/index.js');
 
 
 async function updateData(label){
-  const datafilePath = "./script/gmail/data/sent.json"
-  try {
-    const data = await fs.readFile(datafilePath, 'utf8');
-    let jsonData = JSON.parse(data);
-    jsonData.push(label);
-    await fs.writeFile(datafilePath, JSON.stringify(jsonData, null, 2), 'utf8');
-  } catch (err) {
-    console.error('Error:', err);
-  }
+//   const datafilePath = "./script/gmail/data/sent.json"
+//   try {
+//     const data = await fs.readFile(datafilePath, 'utf8');
+//     let jsonData = JSON.parse(data);
+//     jsonData.push(label);
+//     await fs.writeFile(datafilePath, JSON.stringify(jsonData, null, 2), 'utf8');
+//   } catch (err) {
+//     console.error('Error:', err);
+//   }
 } 
 async function sendMailSingle(auth, recipient, subject, message, filename, path) {
   return new Promise(async (resolve, reject) => {
@@ -36,12 +37,12 @@ async function sendMailSingle(auth, recipient, subject, message, filename, path)
       // });
       
       //-----------------send a drafted mail with its uniquely created id by gmail.------------//
-      const sendRes = await gmail.users.drafts.send({
-        userId: 'me',
-        requestBody: {
-          id: draftRes.data.id,
-        }
-      });
+      // const sendRes = await gmail.users.drafts.send({
+      //   userId: 'me',
+      //   requestBody: {
+      //     id: draftRes.data.id,
+      //   }
+      // });
       
       const today = new Date();
       const year = today.getFullYear();
@@ -53,11 +54,11 @@ async function sendMailSingle(auth, recipient, subject, message, filename, path)
         date: formattedDate,
         recipient:recipient,
         subject:subject,
-        data: sendRes.data
+        data: draftRes.data
       };
       
-      console.log(labels);
-      await updateData(labels);
+      // console.log(labels);
+      // await updateData(labels);
       await fs.unlink("./email.eml", () => { console.log("deleted email.eml"); });
 
       resolve();
@@ -67,15 +68,84 @@ async function sendMailSingle(auth, recipient, subject, message, filename, path)
   });
 }
 
-async function sendMail(recipientArr, subject, message, fileName, path) {
+/*
+sample varObj =>
+{
+  Name : ["Arpit","Hrishita","Subham","Rimjhim"],
+  Company : ["Arista","Oracle","Uber","Google"]
+}
+
+sample message =>
+ `Hey ${Name}, I saw through ${Company}'s recent opening on linkedIn and wanted to apply. PFA my Resume.`
+
+variableDataObj = 
+{
+  Company : "Oracle"
+  Greeting : "Hola!",
+  Name : "Arpit",
+  fileName : "Resume"
+
+}
+variableNameObj
+{
+  subjectVar : ["Company","Greeting"],
+  messageVar : ["Name"],
+  filenameVar : ["fileName"],
+
+}
+*/
+
+function replaceVariables(string, variables) {
+  const regex = /\${(.*?)}/g;
+  const replacedString = string.replace(regex, (match, variable) => {
+    if (variables.hasOwnProperty(variable)) {
+      return variables[variable];
+    }
+    return match; // Return the original match if the variable is not found
+  });
+
+  return replacedString;
+}
+function extractObjectWithIndex(obj, index) {
+  const extractedObject = {};
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && Array.isArray(obj[key]) && obj[key][index]) {
+      extractedObject[key] = obj[key][index];
+    }
+  }
+
+  return extractedObject;
+}
+
+async function messageFormatter(subject, message, fileName, variableDataObj) {
+  subject = replaceVariables(subject, variableDataObj);
+  message = replaceVariables(message, variableDataObj);
+  fileName = replaceVariables(fileName, variableDataObj);
+  const mailContent = { sub: subject, mes: message, file: fileName };
+  return mailContent;
+}
+
+
+async function sendMail(recipientArr, subject, message, fileName, path, variableObj) {
   const auth = await authorize()
   for (let i = 0; i < recipientArr.length; i++) {
-    await sendMailSingle(auth, recipientArr[i], subject, message, fileName, path);
+    const variableDataObj = extractObjectWithIndex(variableObj, i)
+    console.log("\nvariableDataObj : ",variableDataObj)
+
+    const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
+    console.log("\nmailContent : ",mailContent)
+    await sendMailSingle(auth, recipientArr[i], mailContent.sub, mailContent.mes, mailContent.file, path);
   }
   
   return 1;
 }
 
+sendMail(["verma.arpit078@gmail.com","blabbla429@gmail.com"],"${Greetings} ${Name}","Hey ${Name}, I saw through ${Company}'s recent opening on linkedIn and wanted to apply. PFA my Resume.","resume.pdf",``,{
+  Greetings : ["Hey","Hola"],
+  Name : ["Arpit","bla"],
+  Company : ["Arista","Oracle"]
+})
 
 
 async function mailsToday(){

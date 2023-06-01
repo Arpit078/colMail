@@ -12,7 +12,10 @@
 - [x] work on the side menu.
 - [x] implement the figma design.
 # 01-06-23
+- [x] code the variable mail message.
+- [ ] implement variable messaging on the frontend.
 - [ ] implement email import from google sheets.
+- [ ] implement text fromating.
 - [ ] create the reminder tab.
 - [ ] about screen.
 - [ ] onboarding.
@@ -20,4 +23,3 @@
 
 ----------------------------------------------------------------------
 # MVP + 0.1
-- [ ] code the formated and variable mail message.

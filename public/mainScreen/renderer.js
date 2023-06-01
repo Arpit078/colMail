@@ -22,6 +22,18 @@ const items = document.querySelectorAll('.item');
  
 let filePath
 let recipientValuesGlobal
+let varObj
+/*
+sample varObj =>
+{
+  Name : ["Arpit","Hrishita","Subham","Rimjhim"],
+  Company : ["Arista","Oracle","Uber","Google"]
+}
+
+sample message =>
+ `Hey ${Name}, I saw through ${Company}'s recent opening on linkedIn and wanted to apply. PFA my Resume.`
+*/
+
 
 async function updateCount(mailCounterdiv){
   const count = window.electronAPI.mailCount().then((res)=>{
@@ -81,15 +93,7 @@ addReceipient.addEventListener('click', ()=>{
     mailBox.appendChild(inputElement);
    
 })
-minimize.addEventListener('click', ()=>{
-  expanded.forEach(box => {
-  box.style.display = 'none';
-});
-  menuBox.style.width = "5%"
-  minimize.innerText = ""
-  
 
-})
 
 items.forEach((item)=>{
   item.addEventListener('click',()=>{
@@ -124,7 +128,8 @@ send.addEventListener('click',async ()=>{
       subject:subject.value,
       message:message.value,
       fileName:filename.value,
-      filePath : result = typeof filePath !== 'undefined' ? filePath : ""
+      filePath : result = typeof filePath !== 'undefined' ? filePath : "",
+      vaiableObj : varObj
     }
     console.log(data)
     sendMailAndCount(data);

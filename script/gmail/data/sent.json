@@ -120,5 +120,137 @@
         "SENT"
       ]
     }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "server1078@outlook.com",
+    "subject": "colmail",
+    "data": {
+      "id": "188733aac9069ad2",
+      "threadId": "188733aaab8a3110",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "server1078@outlook.com",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "1887344fa18a742a",
+      "threadId": "1887344f98c80941",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "server1078@outlook.com",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "18873452bf12b57f",
+      "threadId": "188734527b300ba3",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "188734536b8b5179",
+      "threadId": "188734533bc37b81",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "18873454021b09f6",
+      "threadId": "18873453d436911c",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "verma.sanjay078@gmail.com",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "18873454bcc1a65d",
+      "threadId": "188734546e154dde",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "2021eeb1156@iitrpr.ac.in",
+    "subject": "colMail: Daily Update",
+    "data": {
+      "id": "18873455547ebe02",
+      "threadId": "188734551ac08ea3",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "${Greetings} ${Name}",
+    "data": {
+      "id": "188759badb1881d0",
+      "threadId": "188759baa87a99a4",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "${Greetings} ${Name}",
+    "data": {
+      "id": "188759bb4bf996ae",
+      "threadId": "188759bb3972f52d",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "Hey Hey",
+    "data": {
+      "id": "188759fb65b0ce7f",
+      "threadId": "188759fb4b625ba7",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "01-06-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "Hola Hola",
+    "data": {
+      "id": "188759fc058cc19b",
+      "threadId": "188759fbdcc607f3",
+      "labelIds": [
+        "SENT"
+      ]
+    }
   }
 ]

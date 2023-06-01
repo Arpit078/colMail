@@ -21,7 +21,7 @@ function createWindow () {
     const webContents = event.sender;
     try {
       // const res = await authorize();
-      await sendMail(data.to, data.subject, data.message, data.fileName, data.filePath);
+      await sendMail(data.to, data.subject, data.message, data.fileName, data.filePath,data.variableObj);
       webContents.send('message-sent', 1);
       console.log("Mail sent successfully");
     } catch (error) {
