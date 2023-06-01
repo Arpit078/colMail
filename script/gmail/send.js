@@ -3,18 +3,18 @@ const {google} = require('googleapis');
 const {createEmlWithAttachment} = require('./eml.js')
 const {authorize} = require('./auth.js');
 const { file } = require('googleapis/build/src/apis/file/index.js');
-
+const {readExcel} = require('./importmail.js')
 
 async function updateData(label){
-//   const datafilePath = "./script/gmail/data/sent.json"
-//   try {
-//     const data = await fs.readFile(datafilePath, 'utf8');
-//     let jsonData = JSON.parse(data);
-//     jsonData.push(label);
-//     await fs.writeFile(datafilePath, JSON.stringify(jsonData, null, 2), 'utf8');
-//   } catch (err) {
-//     console.error('Error:', err);
-//   }
+  const datafilePath = "./script/gmail/data/sent.json"
+  try {
+    const data = await fs.readFile(datafilePath, 'utf8');
+    let jsonData = JSON.parse(data);
+    jsonData.push(label);
+    await fs.writeFile(datafilePath, JSON.stringify(jsonData, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Error:', err);
+  }
 } 
 async function sendMailSingle(auth, recipient, subject, message, filename, path) {
   return new Promise(async (resolve, reject) => {
@@ -37,12 +37,12 @@ async function sendMailSingle(auth, recipient, subject, message, filename, path)
       // });
       
       //-----------------send a drafted mail with its uniquely created id by gmail.------------//
-      // const sendRes = await gmail.users.drafts.send({
-      //   userId: 'me',
-      //   requestBody: {
-      //     id: draftRes.data.id,
-      //   }
-      // });
+      const sendRes = await gmail.users.drafts.send({
+        userId: 'me',
+        requestBody: {
+          id: draftRes.data.id,
+        }
+      });
       
       const today = new Date();
       const year = today.getFullYear();
@@ -54,11 +54,11 @@ async function sendMailSingle(auth, recipient, subject, message, filename, path)
         date: formattedDate,
         recipient:recipient,
         subject:subject,
-        data: draftRes.data
+        data: sendRes.data
       };
       
-      // console.log(labels);
-      // await updateData(labels);
+      console.log(labels);
+      await updateData(labels);
       await fs.unlink("./email.eml", () => { console.log("deleted email.eml"); });
 
       resolve();
@@ -140,12 +140,11 @@ async function sendMail(recipientArr, subject, message, fileName, path, variable
   
   return 1;
 }
-
-sendMail(["verma.arpit078@gmail.com","blabbla429@gmail.com"],"${Greetings} ${Name}","Hey ${Name}, I saw through ${Company}'s recent opening on linkedIn and wanted to apply. PFA my Resume.","resume.pdf",``,{
-  Greetings : ["Hey","Hola"],
-  Name : ["Arpit","bla"],
-  Company : ["Arista","Oracle"]
-})
+// readExcel("./mail.xlsx",["Email","Name"]).then((importId)=>{
+//   sendMail(importId.Email,"Hello ${Name}","${Name},This is to inform you that this mail has been sent by importing email ids from excel sheet.","resume.pdf",``,{
+//     Name : importId.Name,
+//   })
+// })
 
 
 async function mailsToday(){

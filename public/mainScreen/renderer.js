@@ -5,8 +5,8 @@ const subject = document.getElementById('subject')
 const message = document.getElementById('message')
 const send = document.getElementById('send')
 const filename = document.getElementById('filename')
-const addReceipient = document.getElementById('add-receipient')
 const mailBox = document.getElementById('mailBox')
+const addReceipient = document.getElementById('add-receipient')
 const lockList = document.getElementById('lock-list')
 const mailCounterdiv = document.getElementById('mailCounter')
 const reminderCounterdiv = document.getElementById('reminderCounter')
@@ -23,16 +23,6 @@ const items = document.querySelectorAll('.item');
 let filePath
 let recipientValuesGlobal
 let varObj
-/*
-sample varObj =>
-{
-  Name : ["Arpit","Hrishita","Subham","Rimjhim"],
-  Company : ["Arista","Oracle","Uber","Google"]
-}
-
-sample message =>
- `Hey ${Name}, I saw through ${Company}'s recent opening on linkedIn and wanted to apply. PFA my Resume.`
-*/
 
 
 async function updateCount(mailCounterdiv){
@@ -83,6 +73,12 @@ async function sendMailAndCount(data) {
   }
 }
 
+function locklist(){
+  const recipientInputs = document.querySelectorAll('input.receipient');
+  const recipientValues = Array.from(recipientInputs).map(input => input.value);
+  recipientValuesGlobal = recipientValues
+  console.log(recipientValuesGlobal)
+}
 //------------------------------button functions--------------------------------------------------------------
 
 addReceipient.addEventListener('click', ()=>{
@@ -91,7 +87,19 @@ addReceipient.addEventListener('click', ()=>{
     inputElement.setAttribute("placeholder", "Recipient");
     inputElement.setAttribute("class", "receipient");
     mailBox.appendChild(inputElement);
-   
+    locklist()
+})
+
+const recipientInputs = document.querySelectorAll('input.receipient');
+recipientInputs.forEach((input)=>{
+  input.addEventListener("onkeydown",(evt)=>{
+    if (evt.key === "enter") {
+      // Cancel the default action, if needed
+      evt.preventDefault();
+      // Trigger the button element with a click
+      addReceipient.click()
+    }
+  })
 })
 
 
@@ -108,10 +116,7 @@ items.forEach((item)=>{
 })
 
 lockList.addEventListener('click',()=>{
-  const recipientInputs = document.querySelectorAll('input.receipient');
-  const recipientValues = Array.from(recipientInputs).map(input => input.value);
-  recipientValuesGlobal = recipientValues
-  console.log(recipientValuesGlobal)
+  
 })
 
 

@@ -13,8 +13,11 @@
 - [x] implement the figma design.
 # 01-06-23
 - [x] code the variable mail message.
+- [x] write the function to import emails from excel.
 - [ ] implement variable messaging on the frontend.
-- [ ] implement email import from google sheets.
+    - [ ] figure out that lock list thing.
+    - [ ] tab management.
+- [ ] implement email import from excel on frontend.
 - [ ] implement text fromating.
 - [ ] create the reminder tab.
 - [ ] about screen.
