@@ -40,19 +40,26 @@
           <p class="followText">Mails sent Today <span id="mailCounter">..</span></p>
         </div>
         <div id="content">
+          
           <div class="mailIds" id="mailIds">
             <div id="mailBox">
-              <!-- <div class="tabs">
-                <button id="emailTab">Email</button>
-                <button id="emailName">Name</button>
-              </div> -->
-              <div class="inputs">
-                <input type="text" placeholder="Recipient" class="receipient">
+              <div class="tabs" id="tabs">
+                <button id="Email" class="tab">Email</button>
               </div>
+                <div class="tabBox" id="EmailTabBox">
+                  <div class="inputs" id="inputContainer">
+                    <div class="inputBox">
+                      <input type="text" placeholder="Recipient" class="receipient">
+                      <button>x</button>
+                    </div>
+                  </div>
+                 
+                </div>
             </div>
             <div class="btns">
               <button id="add-receipient" class="idBtn">Add</button>
-              <button id="lock-list" class="idBtn">Lock list</button>
+              <button id="import-list" class="idBtn">Import</button>
+              <button id="openPopupButton" class="idBtn">Add Variable</button>              
             </div>
           </div>
           <div class="mailContainer">
@@ -64,6 +71,14 @@
             </div>
             <button id="send">Send</button>
           </div>
+          
+        </div>
+      </div>
+      <div id="popupContainer" class="hidden">
+        <div id="popupContent">
+          <button id="closePopupButton">&times;</button>
+          <input type="text" id="variableInput" placeholder="Enter variable name">
+          <button id="addButton">Add</button>
         </div>
       </div>
       

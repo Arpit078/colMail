@@ -252,5 +252,53 @@
         "SENT"
       ]
     }
+  },
+  {
+    "date": "02-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "Hi",
+    "data": {
+      "id": "1887c5bc71ecf3fc",
+      "threadId": "1887c5bc2bcf31e1",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "03-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "colMail:Update 03-06-23",
+    "data": {
+      "id": "1888091668037d1d",
+      "threadId": "188809165434a3a4",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "03-06-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "colMail:Update 03-06-23",
+    "data": {
+      "id": "1888091715d5e04a",
+      "threadId": "18880916e0aa0700",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "03-06-2023",
+    "recipient": "2021eeb1156@iitrpr.ac.in",
+    "subject": "colMail:Update 03-06-23",
+    "data": {
+      "id": "18880917ca0a1d5a",
+      "threadId": "1888091788e92590",
+      "labelIds": [
+        "SENT"
+      ]
+    }
   }
 ]

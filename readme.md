@@ -14,11 +14,17 @@
 # 01-06-23
 - [x] code the variable mail message.
 - [x] write the function to import emails from excel.
+# 02-06-23 & 03-06-23
 - [ ] implement variable messaging on the frontend.
-    - [ ] figure out that lock list thing.
-    - [ ] tab management.
-- [ ] implement email import from excel on frontend.
-- [ ] implement text fromating.
+    - [x] figure out that lock list thing.
+    - [x] add new section on add var btn.
+    - [x] tab management.
+    - [x] fix add button on tabs
+    - [x] remove empty values from recipientGlobalArr.
+    - [ ] maintain const inputs in all tabs.
+    - [ ] work on delete btn.
+- [ ] implement imports from excel on frontend.
+- [ ] implement text fromating. 
 - [ ] create the reminder tab.
 - [ ] about screen.
 - [ ] onboarding.
