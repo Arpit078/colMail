@@ -58,10 +58,6 @@ updateCount(mailCounterdiv)
 
 
 
-//--------------------------list locking and Global Arr verification--------------------------//
-function lockList(){
-  
-}
 
 //---------------enter key button events---------------------
 
@@ -93,7 +89,7 @@ document.addEventListener("keydown", evt => {
 
 
 
-//------------------------Input Element addition------------------------//
+//------------------------Input Element addition and Removal------------------------//
 
 function countNumberOfInputsInEmailTab(){
   const count = document.getElementById("inputContainer").querySelectorAll(".inputBox").length
@@ -111,10 +107,37 @@ function addInputElementsInAllTabsTogether(){
   })
 }
 
+function removeInputElementInAllTabsTogether(){
+  const inputDivsFromAllTabs = document.querySelectorAll(".inputs")
+  inputDivsFromAllTabs.forEach((input)=>{
+   
+  })
+}
 
 addReceipientBtn.addEventListener("click",addInputElementsInAllTabsTogether)
 
-//--------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------//
+// Add event listener to the document using event delegation
+document.addEventListener("click", function(event) {
+  var target = event.target;
+
+  // Check if the clicked element is the close button
+  if (target.tagName === "BUTTON") {
+    // Find all tabBox containers
+    var tabBoxes = document.querySelectorAll(".tabBox");
+
+    // Loop through each tabBox containe
+    let index = 0
+    tabBoxes.forEach((tabBox)=>{
+      const inputElements = tabBox.querySelectorAll('button');
+      index = Array.from(inputElements).indexOf(target);
+    })
+    tabBoxes.forEach((tabBox)=>{
+      const inputBoxes = tabBox.querySelectorAll(".inputBox")
+      inputBoxes[index].remove()  
+    })
+  }
+});
 
 
 

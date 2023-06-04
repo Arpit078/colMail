@@ -396,5 +396,41 @@
         "SENT"
       ]
     }
+  },
+  {
+    "date": "04-06-2023",
+    "recipient": "verma.arpit078@gmail.com",
+    "subject": "Hi Arpit",
+    "data": {
+      "id": "18886f34bdc319ba",
+      "threadId": "18886f347cf250a2",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "04-06-2023",
+    "recipient": "blabbla429@gmail.com",
+    "subject": "Hola Bla",
+    "data": {
+      "id": "18886f355bc7712c",
+      "threadId": "18886f35150c7ff4",
+      "labelIds": [
+        "SENT"
+      ]
+    }
+  },
+  {
+    "date": "04-06-2023",
+    "recipient": "2021eeb1156@iitrpr.ac.in",
+    "subject": "Bonjour Arpit Kumar Verma",
+    "data": {
+      "id": "18886f35e6c5ed7c",
+      "threadId": "18886f35a217aea8",
+      "labelIds": [
+        "SENT"
+      ]
+    }
   }
 ]
