@@ -1,13 +1,12 @@
 //-----------------------------------------------------------------------//
 const btn = document.getElementById('btn')
 const filePathElement = document.getElementById('filePath')
-const to = document.getElementById('to')
 const subject = document.getElementById('subject')
 const message = document.getElementById('message')
 const send = document.getElementById('send')
 const filename = document.getElementById('filename')
 const mailBox = document.getElementById('mailBox')
-const addReceipient = document.getElementById('add-receipient')
+const addReceipientBtn = document.getElementById('add-receipient')
 const mailCounterdiv = document.getElementById('mailCounter')
 const inputContainer = document.getElementById('inputContainer');
 const openPopupButton = document.getElementById('openPopupButton');
@@ -24,8 +23,8 @@ var root = document.querySelector(':root');
 
  
 let filePath
-let recipientValuesGlobal = {}
-let varObj
+let recipientValuesGlobalArr = []
+let varsGlobalObj = {}
 
 
 
@@ -59,21 +58,61 @@ updateCount(mailCounterdiv)
 
 
 
-
-
-
-
-
-//------------------------Input Element addition and list locking------------------------//
-
-function locklist(key){
-  const InputsTab = document.querySelector(`#${key}TabBox`);
-  const recipientInputs = InputsTab.querySelectorAll("input.receipient")
-  const recipientValues = Array.from(recipientInputs).map(input => input.value);
-  recipientValuesGlobal[key] = recipientValues
+//--------------------------list locking and Global Arr verification--------------------------//
+function lockList(){
   
-  return recipientValuesGlobal
 }
+
+//---------------enter key button events---------------------
+
+document.addEventListener("keydown", evt => {
+  if (evt.key === "Enter" && evt.target.classList.contains("recipient")) {
+    evt.preventDefault();
+    const tabBox = evt.target.closest('.tabBox');
+     
+    const inputElements = tabBox.querySelectorAll('input');
+    const index = Array.from(inputElements).indexOf(evt.target);
+
+    const TabDivThatIsEmailOrOther = evt.target.parentNode.parentNode.parentNode
+    if(evt.target.value.length>0 && TabDivThatIsEmailOrOther.id === "EmailTabBox"){
+      recipientValuesGlobalArr.push([evt.target.value,index])
+      evt.target.style.backgroundColor = "lightBlue"
+    }
+    else if(evt.target.value.length>0 && TabDivThatIsEmailOrOther.id != "EmailTabBox"){
+      const KeyNameInVarObj = TabDivThatIsEmailOrOther.id.replace("TabBox","")
+      varsGlobalObj[KeyNameInVarObj].push([evt.target.value,index]) 
+      evt.target.style.backgroundColor = "lightBlue"
+    }
+    
+  }
+});
+//--------------------------------------------------------------------------------------------//
+
+
+
+
+
+
+//------------------------Input Element addition------------------------//
+
+function countNumberOfInputsInEmailTab(){
+  const count = document.getElementById("inputContainer").querySelectorAll(".inputBox").length
+  return count
+}
+
+function addInputElementsInAllTabsTogether(){
+  const inputDivsFromAllTabs = document.querySelectorAll(".inputs")
+  inputDivsFromAllTabs.forEach((input)=>{
+    const inputTagAndButtonDiv = document.createElement("div")
+    inputTagAndButtonDiv.classList.add("inputBox")
+    inputTagAndButtonDiv.innerHTML = `<input type="text" placeholder="Recipient" class="recipient">
+    <button>x</button>`
+    input.appendChild(inputTagAndButtonDiv)
+  })
+}
+
+
+addReceipientBtn.addEventListener("click",addInputElementsInAllTabsTogether)
 
 //--------------------------------------------------------------------------------------//
 
@@ -87,15 +126,15 @@ function locklist(key){
 
 
 
-//----------------------------Tabs add and visibility functionality-----------------------//
+//----------------------------Tabs Addition and visibility functionality-----------------------//
 function addVariable() {
-  const variableName = variableInput.value;
+  const variableName = variableInput.value.replace(/ /g,'_');
   popupContainer.style.display = 'none';
-  console.log(`Variable Name: ${variableName}`);
   const length = getComputedStyle(root).getPropertyValue('--length')
   if(variableName.length > 6){
     root.style.setProperty("--length","5rem")
   }
+  varsGlobalObj[variableName] = []
   return variableName
 }
 openPopupButton.addEventListener('click', () => {
@@ -106,7 +145,17 @@ closePopupButton.addEventListener('click', () => {
   popupContainer.style.display = 'none';
 });
 
-
+function addInputSkeletonInNewTab(id){
+  const newTabSkeleton = document.createElement("div")
+  newTabSkeleton.classList.add("tabBox")
+  newTabSkeleton.setAttribute("id",`${id}TabBox`)
+  newTabSkeleton.innerHTML = 
+  `
+  <div class="inputs">
+  </div>
+  `
+  mailBox.appendChild(newTabSkeleton)
+}
 addVariableButton.addEventListener('click', ()=>{
   const varName = addVariable();
   const tab = document.createElement('button')
@@ -114,6 +163,19 @@ addVariableButton.addEventListener('click', ()=>{
   tab.setAttribute("class","tab")
   tab.innerText = varName
   tabs.appendChild(tab)
+  addInputSkeletonInNewTab(varName)
+    const countOfEmailTab = countNumberOfInputsInEmailTab()
+    inputTagAndButtonDivForOtherTabBoxesHTML = `<div class="inputBox">
+    <input type="text" placeholder="Recipient" class="recipient">
+    <button>x</button>
+  </div>`
+    for(let i=1;i<countOfEmailTab;i++){
+      inputTagAndButtonDivForOtherTabBoxesHTML += `<div class="inputBox">
+      <input type="text" placeholder="Recipient" class="recipient">
+      <button>x</button>
+    </div>`
+    }
+    document.querySelector(`#${varName}TabBox`).querySelector(".inputs").innerHTML = inputTagAndButtonDivForOtherTabBoxesHTML
 });
 
 tabs.addEventListener('click', function(event) {
@@ -132,15 +194,45 @@ tabs.addEventListener('click', function(event) {
 
 
 
+//------------------------------verification--------------------------------------------------//
+function verifyArrays(recipientValuesGlobalArr,varsGlobalObj){
+  const lengthOfRecipientArr = recipientValuesGlobalArr.length
+  let varObjLengthArr = []
+  for(var key in varsGlobalObj){
+    varObjLengthArr.push(varsGlobalObj[key].length)
+  }
+  let flag = 1
+  if(varObjLengthArr.length>0){
+    varObjLengthArr.forEach((len)=>{
+      if(len!=lengthOfRecipientArr){flag =0}
+    })
+  }
+  return flag
+}
 
-
-
-
-
-
+//-------------------------------------------------------------------------------------------//
 
 
 //------------------------------Data processing and sending the mail portion------------------//
+
+function processSentArrays(arr, obj) {
+  const sortedArray = arr.sort((a, b) => a[1] - b[1]);
+  const finalArr = sortedArray.map(item => item[0]);
+
+  const finalObj = {};
+  for (const prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      const sortedSubarray = obj[prop].sort((a, b) => a[1] - b[1]);
+      const finalSubarray = sortedSubarray.map(item => item[0]);
+      finalObj[prop] = finalSubarray;
+    }
+  }
+
+  // console.log(finalObj);
+  const result = [finalArr, finalObj];
+  return result;
+}
+
 async function sendDataAndWait(data) {
   return new Promise((resolve, reject) => {
     window.electronAPI.sendData(data, (error, res) => {
@@ -170,16 +262,21 @@ btn.addEventListener('click', async () => {
 
 
 send.addEventListener('click',async ()=>{
-  const data = {
-      to : recipientValuesGlobal,
-      subject:subject.value,
-      message:message.value,
-      fileName:filename.value,
-      filePath : result = typeof filePath !== 'undefined' ? filePath : "",
-      vaiableObj : varObj
-    }
-    console.log(data)
-    sendMailAndCount(data);
+  if(verifyArrays(recipientValuesGlobalArr,varsGlobalObj)==1){
+    const sendArray = processSentArrays(recipientValuesGlobalArr,varsGlobalObj)
+    console.log(sendArray)
+    const data = {
+        to : sendArray[0],
+        subject:subject.value,
+        message:message.value,
+        fileName:filename.value,
+        filePath : result = typeof filePath !== 'undefined' ? filePath : "",
+        variableObj : sendArray[1]
+      }
+      console.log(data)
+      sendMailAndCount(data);
+  }
+  
   
 })
 //----------------------------------------------------------------------------------------------------------------------//
