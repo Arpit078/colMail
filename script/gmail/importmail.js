@@ -6,6 +6,11 @@ async function readExcel(sheetPath,arr){
     let workbook_response = xlsx.utils.sheet_to_json(        // Step 4
       workbook.Sheets[workbook_sheet[0]]
     );
+    // console.log(workbook_response)
+    arr = []
+    for(var key in workbook_response[0]){
+      arr.push(key)
+    }
     let required_format = {}
     await arr.forEach(element => {
       required_format[element] = [];
@@ -16,7 +21,9 @@ async function readExcel(sheetPath,arr){
     return required_format
 }
 
-// console.log(readExcel("./mail.XLSX",["Email","Name"]))
+// readExcel("./mail.XLSX").then((res)=>{
+//   console.log(res)
+// })
 module.exports = {readExcel}
 /*
 required format :

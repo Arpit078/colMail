@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const {sendMail,mailsToday} = require("./script/gmail/send.js")
 const {reminder} = require("./script/gmail/reminder.js")
+const {readExcel} = require("./script/gmail/importmail.js")
 
 async function handleFileOpen () {
   const { canceled, filePaths } = await dialog.showOpenDialog()
@@ -21,7 +22,7 @@ function createWindow () {
     const webContents = event.sender;
     try {
       // const res = await authorize();
-      await sendMail(data.to, data.subject, data.message, data.fileName, data.filePath,data.variableObj);
+      await sendMail(data.to, data.subject,data.message, data.fileName, data.filePath,data.variableObj,data.xlsxPath);
       webContents.send('message-sent', 1);
       console.log("Mail sent successfully");
     } catch (error) {

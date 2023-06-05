@@ -127,18 +127,33 @@ async function messageFormatter(subject, message, fileName, variableDataObj) {
 }
 
 
-async function sendMail(recipientArr, subject, message, fileName, path, variableObj) {
+async function sendMail(recipientArr, subject, message, fileName, path, variableObj,xlsxPath) {
   const auth = await authorize()
-  for (let i = 0; i < recipientArr.length; i++) {
-    const variableDataObj = extractObjectWithIndex(variableObj, i)
-    console.log("\nvariableDataObj : ",variableDataObj)
+  if(xlsxPath === ""){
 
-    const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
-    console.log("\nmailContent : ",mailContent)
-    await sendMailSingle(auth, recipientArr[i], mailContent.sub, mailContent.mes, mailContent.file, path);
-  }
+    for (let i = 0; i < recipientArr.length; i++) {
+      const variableDataObj = extractObjectWithIndex(variableObj, i)
+      console.log("\nvariableDataObj : ",variableDataObj)
   
-  return 1;
+      const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
+      console.log("\nmailContent : ",mailContent)
+      await sendMailSingle(auth, recipientArr[i], mailContent.sub, mailContent.mes, mailContent.file, path);
+    }
+    return 1;
+  }else{
+    const excelData = await readExcel(xlsxPath) 
+    const { Email, ...newObject } = excelData;
+    for (let i = 0; i < excelData.Email.length; i++) {
+      const variableDataObj = extractObjectWithIndex(newObject, i)
+      console.log("\nvariableDataObj : ",variableDataObj)
+  
+      const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
+      console.log("\nmailContent : ",mailContent)
+      await sendMailSingle(auth,excelData.Email[i], mailContent.sub, mailContent.mes, mailContent.file, path);
+  }
+    return 1;
+
+}
 }
 // readExcel("./mail.xlsx",["Email","Name"]).then((importId)=>{
 //   sendMail(importId.Email,"Hello ${Name}","${Name},This is to inform you that this mail has been sent by importing email ids from excel sheet.","resume.pdf",``,{
@@ -165,4 +180,4 @@ async function mailsToday(){
 
 }
 
-module.exports = { sendMail,mailsToday }
+module.exports = { sendMail,mailsToday}

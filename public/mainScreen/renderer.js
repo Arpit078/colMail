@@ -23,6 +23,7 @@ var root = document.querySelector(':root');
 
  
 let filePath
+let excelFilePath
 let recipientValuesGlobalArr = []
 let varsGlobalObj = {}
 
@@ -57,9 +58,29 @@ updateCount(mailCounterdiv)
 
 
 
+//-----------------------------importing from excel sheets------------------------------//
 
 
-//---------------enter key button events---------------------
+const importBtn = document.querySelector("#import-list")
+importBtn.addEventListener('click', async () => {
+  const filePathvar = await window.electronAPI.openFile()
+  console.log(filePathvar)
+  excelFilePath =  filePathvar
+  if(filePathvar!=""){
+    mailBox.innerHTML = `<div class="importPrompt">
+    <p id="importPromptText">File Imported</p>
+  </div>`
+  }
+})
+
+
+//-------------------------------------------------------------------------------------//
+
+
+
+
+
+//---------------enter key button events--------------------------------------------------//
 
 document.addEventListener("keydown", evt => {
   if (evt.key === "Enter" && evt.target.classList.contains("recipient")) {
@@ -116,8 +137,7 @@ function removeInputElementInAllTabsTogether(){
 
 addReceipientBtn.addEventListener("click",addInputElementsInAllTabsTogether)
 
-//------------------------------------------------------------------------------------//
-// Add event listener to the document using event delegation
+// Removal part.
 document.addEventListener("click", function(event) {
   var target = event.target;
 
@@ -134,10 +154,13 @@ document.addEventListener("click", function(event) {
     })
     tabBoxes.forEach((tabBox)=>{
       const inputBoxes = tabBox.querySelectorAll(".inputBox")
-      inputBoxes[index].remove()  
+      if(inputBoxes[index]){
+        inputBoxes[index].remove()
+      } 
     })
   }
 });
+//------------------------------------------------------------------------------------//
 
 
 
@@ -294,7 +317,8 @@ send.addEventListener('click',async ()=>{
         message:message.value,
         fileName:filename.value,
         filePath : result = typeof filePath !== 'undefined' ? filePath : "",
-        variableObj : sendArray[1]
+        variableObj : sendArray[1],
+        xlsxPath : excelFilePath || ""
       }
       console.log(data)
       sendMailAndCount(data);

@@ -23,7 +23,7 @@
     - [x] remove empty values from recipientGlobalArr.
     - [x] maintain const inputs in all tabs.
     - [x] work on delete btn.
-- [ ] implement imports from excel on frontend.
+- [x] implement imports from excel on frontend.
 - [ ] implement text fromating. 
 - [ ] create the reminder tab.
 - [ ] about screen.
