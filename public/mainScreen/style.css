@@ -11,14 +11,14 @@ body{
 }
 .container input{
     border: none;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.27);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     margin-bottom: 10px ;
     outline: none;
 
 }
 .container textarea{
     border: none;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.27);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     margin-bottom: 10px ;
 
 
@@ -58,18 +58,13 @@ body{
 
 
 }
-.btns{
-    position: absolute;
-    bottom: 0;
-}
+
 .file{
     display: flex;
     justify-content: space-between;
 }
-#send{
-    position: absolute;
-    bottom: 0;
-    right: 0;
+.btns{
+    
     border: none;
     padding: 8px 12px 8px 12px;
     background-color: #7E65B3;
@@ -81,7 +76,7 @@ body{
 }
 .mailContainer{
     /* background-color: rgb(65, 12, 71); */
-    grid-column-start:4;
+    grid-column-start:1;
     grid-column-end:10;
     grid-row-start: 2;
     grid-row-end: 20;
@@ -98,25 +93,19 @@ body{
     resize: none;
     outline: none;
 }
-#btn{
-    border: none;
-    border-bottom: 5px solid grey;
-    background-color: grey;
-    border-radius: 5px 5px 10px 10px;
-    color: white;
-    cursor: pointer;
-}
-.idBtn{
-    border: none;
-    padding: 8px 12px 8px 12px;
-    background-color: #b36d65;
-    font-weight: 500;
-    color: white;
-    border-radius: 1rem;
-    cursor: pointer;
-}
 
 
+.buttons{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    /* width: 20%; */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 1rem;
+}
 .contentWrapper{
     display: grid;
     width: 95%;

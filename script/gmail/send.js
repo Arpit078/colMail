@@ -16,11 +16,11 @@ async function updateData(label){
     console.error('Error:', err);
   }
 } 
-async function sendMailSingle(auth, recipient, subject, message, filename, path) {
+async function sendMailSingle(auth,recipient,subject,message,path) {
   return new Promise(async (resolve, reject) => {
     try {
       const gmail = google.gmail({ version: 'v1', auth });
-      const attachment = await createEmlWithAttachment(recipient, subject, message, filename, path);
+      const attachment = await createEmlWithAttachment(recipient, subject, message, path);
       
       //-------------------drafting the mail.---------------------//
       const draftRes = await gmail.users.drafts.create({
@@ -119,42 +119,29 @@ function extractObjectWithIndex(obj, index) {
   return extractedObject;
 }
 
-async function messageFormatter(subject, message, fileName, variableDataObj) {
+async function messageFormatter(subject, message, variableDataObj) {
   subject = await replaceVariables(subject, variableDataObj);
   message = await replaceVariables(message, variableDataObj);
-  fileName = await replaceVariables(fileName, variableDataObj);
-  const mailContent = { sub: subject, mes: message, file: fileName };
+  const mailContent = { sub: subject, mes: message};
   return mailContent;
 }
 
 
-async function sendMail(recipientArr, subject, message, fileName, path, variableObj,xlsxPath) {
+async function sendMail(subject, message,path,xlsxPath) {
   const auth = await authorize()
-  if(xlsxPath === ""){
-
-    for (let i = 0; i < recipientArr.length; i++) {
-      const variableDataObj = extractObjectWithIndex(variableObj, i)
-      console.log("\nvariableDataObj : ",variableDataObj)
   
-      const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
-      console.log("\nmailContent : ",mailContent)
-      await sendMailSingle(auth, recipientArr[i], mailContent.sub, mailContent.mes, mailContent.file, path);
-    }
-    return 1;
-  }else{
-    const excelData = await readExcel(xlsxPath) 
-    const { Email, ...newObject } = excelData;
-    for (let i = 0; i < excelData.Email.length; i++) {
-      const variableDataObj = extractObjectWithIndex(newObject, i)
-      console.log("\nvariableDataObj : ",variableDataObj)
-  
-      const mailContent = await messageFormatter(subject,message,fileName,variableDataObj)
-      console.log("\nmailContent : ",mailContent)
-      await sendMailSingle(auth,excelData.Email[i], mailContent.sub, mailContent.mes, mailContent.file, path);
-  }
-    return 1;
+  const excelData = await readExcel(xlsxPath) 
+  const { Email, ...newObject } = excelData;
+  for (let i = 0; i < excelData.Email.length; i++) {
+    const variableDataObj = extractObjectWithIndex(newObject, i)
+    console.log("\nvariableDataObj : ",variableDataObj)
 
+    const mailContent = await messageFormatter(subject,message,variableDataObj)
+    console.log("\nmailContent : ",mailContent)
+    await sendMailSingle(auth,excelData.Email[i], mailContent.sub, mailContent.mes, path);
 }
+  return 1;
+
 }
 // readExcel("./mail.xlsx",["Email","Name"]).then((importId)=>{
 //   sendMail(importId.Email,"Hello ${Name}","${Name},This is to inform you that this mail has been sent by importing email ids from excel sheet.","resume.pdf",``,{

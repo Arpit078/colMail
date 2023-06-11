@@ -25,48 +25,22 @@
           <p class="followText">Mails sent Today <span id="mailCounter">..</span></p>
         </div>
         <div id="content">
-          
-          <div class="mailIds" id="mailIds">
-            <div id="mailBox">
-              <div class="tabs" id="tabs">
-                <button id="Email" class="tab">Email</button>
-              </div>
-                <div class="tabBox" id="EmailTabBox">
-                  <div class="inputs" id="inputContainer">
-                    <div class="inputBox">
-                      <input type="text" placeholder="Recipient" class="recipient">
-                      <button>x</button>
-                    </div>
-                  </div>
-                 
-                </div>
-                
-            </div>
-            <div class="btns">
-              <button id="add-receipient" class="idBtn">Add</button>
-              <button id="import-list" class="idBtn">Import</button>
-              <button id="openPopupButton" class="idBtn">Add Variable</button>              
-            </div>
-          </div>
           <div class="mailContainer">
+            <!-- <input type="text" id="to" placeholder="To" disabled> -->
             <input type="text" id="subject" placeholder="Subject">
-            <textarea id="message"  placeholder="Message" rows="15" cols="50"></textarea>
+            <textarea id="message"  placeholder="Message" rows="23" cols="50"></textarea>
             <div class="file">
-              <input type="text" id="filename" placeholder="File name">
-              <button type="button" id="btn">Open a File</button>
+              
             </div>
-            <button id="send">Send</button>
+            <div class="buttons">
+              <button type="button" id="btn" class="btns">Attach a File</button>
+              <button id="import-list" class="idBtn btns">Import Recipients</button>
+              <button id="send" class="btns">Send</button>
+            </div>
           </div>
-          
         </div>
       </div>
-      <div id="popupContainer" class="hidden">
-        <div id="popupContent">
-          <button id="closePopupButton">&times;</button>
-          <input type="text" id="variableInput" placeholder="Enter variable name">
-          <button id="addButton">Add</button>
-        </div>
-      </div>
+     
       
     </div>
     <script src='./renderer.js'></script>

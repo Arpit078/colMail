@@ -1,7 +1,8 @@
 const MailComposer = require('nodemailer/lib/mail-composer');
 const fs = require("fs")
-async function createEmlWithAttachment(recipient,subject,emailMessage,filename,path) {
+async function createEmlWithAttachment(recipient,subject,emailMessage,path) {
   // Compose the email message
+  const fileName = path.split('\\').pop();
   const message = {
     from: 'dev@gmail.com',
     to: recipient,
@@ -9,7 +10,7 @@ async function createEmlWithAttachment(recipient,subject,emailMessage,filename,p
     text: emailMessage,
     attachments: [
       {
-        filename: filename,
+        filename: fileName,
         path: path, // Replace with the actual path to the PDF file
       },
     ],

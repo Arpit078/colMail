@@ -31,7 +31,7 @@
 - [ ] file attachment notif
 - [ ] remove filename input
 
-- [ ] remove manual addition of emails
+- [x] remove manual addition of emails
 - [ ] send report on excel sheet
 - [ ] live on frontend
 

@@ -22,7 +22,7 @@ function createWindow () {
     const webContents = event.sender;
     try {
       // const res = await authorize();
-      await sendMail(data.to, data.subject,data.message, data.fileName, data.filePath,data.variableObj,data.xlsxPath);
+      await sendMail(data.subject,data.message, data.filePath,data.xlsxPath);
       webContents.send('message-sent', 1);
       console.log("Mail sent successfully");
     } catch (error) {
