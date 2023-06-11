@@ -23,12 +23,16 @@
     - [x] remove empty values from recipientGlobalArr.
     - [x] maintain const inputs in all tabs.
     - [x] work on delete btn.
+# 05-06-23
 - [x] implement imports from excel on frontend.
-- [ ] implement text fromating. 
-- [ ] create the reminder tab.
-- [ ] about screen.
-- [ ] onboarding.
-
-
 ----------------------------------------------------------------------
-# MVP + 0.1
+# Tasks
+## 10 day
+- [ ] file attachment notif
+- [ ] remove filename input
+
+- [ ] remove manual addition of emails
+- [ ] send report on excel sheet
+- [ ] live on frontend
+
+- [ ] login auth

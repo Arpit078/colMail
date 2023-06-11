@@ -13,15 +13,15 @@ async function readExcel(sheetPath,arr){
     }
     let required_format = {}
     await arr.forEach(element => {
-      required_format[element] = [];
+      required_format[element.trim()] = [];
       workbook_response.forEach(e=>{
-        required_format[element].push(e[element])
+        required_format[element.trim()].push(e[element])
       })
     });
     return required_format
 }
 
-// readExcel("./mail.XLSX").then((res)=>{
+// readExcel("./trial.XLSX").then((res)=>{
 //   console.log(res)
 // })
 module.exports = {readExcel}

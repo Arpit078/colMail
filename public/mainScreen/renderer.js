@@ -68,8 +68,12 @@ importBtn.addEventListener('click', async () => {
   excelFilePath =  filePathvar
   if(filePathvar!=""){
     mailBox.innerHTML = `<div class="importPrompt">
-    <p id="importPromptText">File Imported</p>
+    <p id="importPromptText"><span id="path">"${filePathvar}"</span><b> Imported<b></p>
   </div>`
+  openPopupButton.style.display = "none"
+  addReceipientBtn.style.display = "none"
+  importBtn.innerText = "Import Another File"
+
   }
 })
 

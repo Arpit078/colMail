@@ -98,14 +98,15 @@ variableNameObj
 function replaceVariables(string, variables) {
   const regex = /\${(.*?)}/g;
   const replacedString = string.replace(regex, (match, variable) => {
-    if (variables.hasOwnProperty(variable)) {
-      return variables[variable];
-    }
-    return match; // Return the original match if the variable is not found
+      if (variables.hasOwnProperty(variable)) {
+        return variables[variable];
+      }
+      return match; // Return the original match if the variable is not found
   });
 
   return replacedString;
 }
+// console.log(replaceVariables("${Name} and ${Company}",{ Name: 'Arpit', Company: 'xyz' }))
 function extractObjectWithIndex(obj, index) {
   const extractedObject = {};
 
@@ -119,9 +120,9 @@ function extractObjectWithIndex(obj, index) {
 }
 
 async function messageFormatter(subject, message, fileName, variableDataObj) {
-  subject = replaceVariables(subject, variableDataObj);
-  message = replaceVariables(message, variableDataObj);
-  fileName = replaceVariables(fileName, variableDataObj);
+  subject = await replaceVariables(subject, variableDataObj);
+  message = await replaceVariables(message, variableDataObj);
+  fileName = await replaceVariables(fileName, variableDataObj);
   const mailContent = { sub: subject, mes: message, file: fileName };
   return mailContent;
 }
