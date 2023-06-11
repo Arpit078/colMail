@@ -1,3 +1,13 @@
+# Tasks
+## 10 day
+- [ ] file attachment notif
+- [ ] remove filename input
+
+- [x] remove manual addition of emails
+- [ ] send report on excel sheet
+- [ ] live on frontend
+
+- [ ] login auth
 #### To Do
 ---------------------------------------------------------------------
 # MVP
@@ -26,13 +36,3 @@
 # 05-06-23
 - [x] implement imports from excel on frontend.
 ----------------------------------------------------------------------
-# Tasks
-## 10 day
-- [ ] file attachment notif
-- [ ] remove filename input
-
-- [x] remove manual addition of emails
-- [ ] send report on excel sheet
-- [ ] live on frontend
-
-- [ ] login auth
