@@ -1,8 +1,7 @@
 # Tasks
 ## 10 day
 - [ ] file attachment notif
-- [ ] remove filename input
-
+- [x] remove filename input
 - [x] remove manual addition of emails
 - [ ] send report on excel sheet
 - [ ] live on frontend
