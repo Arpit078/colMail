@@ -3,7 +3,7 @@
 - [ ] file attachment notif
 - [x] remove filename input
 - [x] remove manual addition of emails
-- [ ] send report on excel sheet
+- [x] send report on excel sheet
 - [ ] live on frontend
 
 - [ ] login auth
