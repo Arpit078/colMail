@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const {sendMail,mailsToday} = require("./script/gmail/send.js")
 const {reminder} = require("./script/gmail/reminder.js")
-const {readExcel} = require("./script/gmail/importmail.js")
+const {readExcel} = require("./script/gmail/readExcel.js")
 
 async function handleFileOpen () {
   const { canceled, filePaths } = await dialog.showOpenDialog()

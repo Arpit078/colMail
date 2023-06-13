@@ -3,7 +3,8 @@ const {google} = require('googleapis');
 const {createEmlWithAttachment} = require('./eml.js')
 const {authorize} = require('./auth.js');
 const { file } = require('googleapis/build/src/apis/file/index.js');
-const {readExcel} = require('./importmail.js')
+const {readExcel} = require('./readExcel.js');
+const { updateExcel } = require('./updateExcel.js');
 
 async function updateData(label){
   const datafilePath = "./script/gmail/data/sent.json"
@@ -16,7 +17,7 @@ async function updateData(label){
     console.error('Error:', err);
   }
 } 
-async function sendMailSingle(auth,recipient,subject,message,path) {
+async function sendMailSingle(auth,recipient,subject,message,path,timeStampData) {
   return new Promise(async (resolve, reject) => {
     try {
       const gmail = google.gmail({ version: 'v1', auth });
@@ -48,15 +49,17 @@ async function sendMailSingle(auth,recipient,subject,message,path) {
       const year = today.getFullYear();
       const month = String(today.getMonth() + 1).padStart(2, '0');
       const day = String(today.getDate()).padStart(2, '0');
-      const formattedDate = `${day}-${month}-${year}`; // 29-05-2023
+      const hour = today.getHours()
+      const minute = today.getMinutes()
+      const formattedDateTime = `${hour}:${minute} ${day}-${month}-${year}`; // 29-05-2023
       
       const labels = {
-        date: formattedDate,
+        date: formattedDateTime,
         recipient:recipient,
         subject:subject,
         data: sendRes.data
       };
-      
+      timeStampData.push(formattedDateTime)
       console.log(labels);
       await updateData(labels);
       await fs.unlink("./email.eml", () => { console.log("deleted email.eml"); });
@@ -129,7 +132,7 @@ async function messageFormatter(subject, message, variableDataObj) {
 
 async function sendMail(subject, message,path,xlsxPath) {
   const auth = await authorize()
-  
+  const timeStampData = []
   const excelData = await readExcel(xlsxPath) 
   const { Email, ...newObject } = excelData;
   for (let i = 0; i < excelData.Email.length; i++) {
@@ -138,8 +141,9 @@ async function sendMail(subject, message,path,xlsxPath) {
 
     const mailContent = await messageFormatter(subject,message,variableDataObj)
     console.log("\nmailContent : ",mailContent)
-    await sendMailSingle(auth,excelData.Email[i], mailContent.sub, mailContent.mes, path);
+    await sendMailSingle(auth,excelData.Email[i], mailContent.sub, mailContent.mes, path,timeStampData);
 }
+  await updateExcel(xlsxPath,timeStampData)
   return 1;
 
 }
