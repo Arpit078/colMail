@@ -13,7 +13,7 @@ const inputContainer = document.getElementById('inputContainer');
 
 
  
-let filePath
+let filePath = []
 let excelFilePath
 let recipientValuesGlobalArr = []
 let varsGlobalObj = {}
@@ -51,7 +51,6 @@ updateCount(mailCounterdiv)
 
 //-----------------------------importing from excel sheets------------------------------//
 
-
 const importBtn = document.querySelector("#import-list")
 importBtn.addEventListener('click', async () => {
   const filePathvar = await window.electronAPI.openFile()
@@ -64,7 +63,6 @@ importBtn.addEventListener('click', async () => {
 
   }
 })
-
 
 //-------------------------------------------------------------------------------------//
 
@@ -97,8 +95,8 @@ function verifyArrays(recipientValuesGlobalArr,varsGlobalObj){
   }
   return flag
 }
-
 //-------------------------------------------------------------------------------------------//
+
 
 
 //------------------------------Data processing and sending the mail portion------------------//
@@ -142,10 +140,20 @@ async function sendMailAndCount(data) {
     console.error("An error occurred:", error);
   }
 }
+
 btn.addEventListener('click', async () => {
   const filePathvar = await window.electronAPI.openFile()
-  console.log(filePathvar)
-  filePath = filePathvar
+  // console.log(filePathvar)
+  const fileBox = document.querySelector("#file")
+  const file = document.createElement("div")
+  const fileName = filePathvar.split('\\').pop();
+  file.innerHTML =`<div class="fileOutline">
+  <span class="fileName">${fileName}</span>
+</div>`
+  fileBox.appendChild(file)
+  btn.innerText = "Attach more files."
+  filePath.push(filePathvar)
+  console.log(filePath)
 })
 
 
@@ -156,7 +164,7 @@ send.addEventListener('click',async ()=>{
     const data = {
         subject:subject.value,
         message:message.value,
-        filePath : result = typeof filePath !== 'undefined' ? filePath : "",
+        filePath : filePath,
         xlsxPath : excelFilePath || ""
       }
       console.log(data)

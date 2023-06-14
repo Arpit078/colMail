@@ -1,12 +1,13 @@
 # Tasks
-## 10 day
-- [ ] file attachment notif
-- [x] remove filename input
-- [x] remove manual addition of emails
-- [x] send report on excel sheet
-- [ ] live on frontend
-
-- [ ] login auth
+- [x] file attachment notif.
+- [x] remove filename input.
+- [x] remove manual addition of emails.
+- [x] send report on excel sheet.
+- [x] multiple file attachments.
+- [ ] viewable list of recipients on the frontend.
+- [ ] live on frontend.
+- [ ] scheduled mailing.
+<!-- - [ ] login auth -->
 #### To Do
 ---------------------------------------------------------------------
 # MVP

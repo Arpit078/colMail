@@ -1,19 +1,19 @@
 const MailComposer = require('nodemailer/lib/mail-composer');
 const fs = require("fs")
-async function createEmlWithAttachment(recipient,subject,emailMessage,path) {
+async function createEmlWithAttachment(recipient,subject,emailMessage,pathArr) {
   // Compose the email message
-  const fileName = path.split('\\').pop();
+  let attachmentObj = []
+  for(let i=0;i<pathArr.length;i++){
+    const fileName = pathArr[i].split('\\').pop();
+    const pathVar = pathArr[i]
+    attachmentObj.push({filename:fileName,path:pathVar})
+  }
   const message = {
     from: 'dev@gmail.com',
     to: recipient,
     subject: subject,
     text: emailMessage,
-    attachments: [
-      {
-        filename: fileName,
-        path: path, // Replace with the actual path to the PDF file
-      },
-    ],
+    attachments:attachmentObj
   };
 
   // Create a new MailComposer instance
@@ -27,5 +27,5 @@ async function createEmlWithAttachment(recipient,subject,emailMessage,path) {
   console.log('EML file created: email.eml');
   return attachment
 }
-
+// createEmlWithAttachment("verma.arpit078@gmail.com","Hi","Hello",["path:D:\\PET-PROJECTS\\colMail\\app\\preload.js","path:D:\\PET-PROJECTS\\colMail\\app\\test.XLSX"])
 module.exports = {createEmlWithAttachment}
