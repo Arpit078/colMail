@@ -60,7 +60,11 @@ importBtn.addEventListener('click', async () => {
     
  
   importBtn.innerText = "Import Another File"
-
+  const fileBox = document.querySelector("#recipientFile")
+  const fileName = filePathvar.split('\\').pop();
+  fileBox.innerHTML =`<div class="fileOutlineRecipient">
+  <span class="fileName">${fileName}</span>
+</div>`
   }
 })
 

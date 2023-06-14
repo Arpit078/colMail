@@ -233,6 +233,14 @@ body{
     bottom: 0;
     width: 25%;
 }
+#recipientFile{
+    position: absolute;
+    bottom: 2rem;
+    /* overflow-y: scroll; */
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+}
 #file{
     position: absolute;
     bottom: 0;
@@ -246,7 +254,11 @@ body{
     padding: 5px;
     margin: 1px;
 }
+.fileOutlineRecipient{
+    background-color:#7e65b39d;
+    padding: 5px;
+    margin: 1px;
+}
 .fileName{
-    color: black;
     font-weight:500 ;
 }
