@@ -4,9 +4,13 @@
 - [x] remove manual addition of emails.
 - [x] send report on excel sheet.
 - [x] multiple file attachments.
-- [ ] viewable list of recipients on the frontend.
-- [ ] live on frontend.
+- [x] disable send button until recipients list not imported.
+- [x] send update on frontend.
 - [ ] scheduled mailing.
+![Alt text](image.png)
+https://issuetracker.google.com/issues/140922183?pli=1
+- [ ] viewable list of recipients on the frontend.
+- [ ] add cc,bcc
 <!-- - [ ] login auth -->
 #### To Do
 ---------------------------------------------------------------------

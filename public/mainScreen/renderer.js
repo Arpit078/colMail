@@ -65,8 +65,13 @@ importBtn.addEventListener('click', async () => {
   fileBox.innerHTML =`<div class="fileOutlineRecipient">
   <span class="fileName">${fileName}</span>
 </div>`
-  }
-})
+    if(message.value!=""&&subject.value!=""){
+      send.style.cursor = "pointer"
+      send.style.backgroundColor = "#ADD8E6"
+      send.innerText = "Send"
+      send.disabled = false
+    }
+}})
 
 //-------------------------------------------------------------------------------------//
 
@@ -85,7 +90,7 @@ importBtn.addEventListener('click', async () => {
 
 
 //------------------------------verification--------------------------------------------------//
-function verifyArrays(recipientValuesGlobalArr,varsGlobalObj){
+function verifyArrays(recipientValuesGlobalArr,varsGlobalObj,subject,message){
   const lengthOfRecipientArr = recipientValuesGlobalArr.length
   let varObjLengthArr = []
   for(var key in varsGlobalObj){
@@ -96,6 +101,12 @@ function verifyArrays(recipientValuesGlobalArr,varsGlobalObj){
     varObjLengthArr.forEach((len)=>{
       if(len!=lengthOfRecipientArr){flag =0}
     })
+  }
+  if(subject===""){
+    flag=0;
+  }
+  if(message===""){
+    flag=0;
   }
   return flag
 }
@@ -123,21 +134,33 @@ function processSentArrays(arr, obj) {
   return result;
 }
 
-async function sendDataAndWait(data) {
-  return new Promise((resolve, reject) => {
-    window.electronAPI.sendData(data, (error, res) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(res);
-      }
-    });
-  });
-}
+
+// async function sendDataAndWait(data) {
+//   return new Promise((resolve, reject) => {
+//     window.electronAPI.sendData(data, (error, res) => {
+//       if (error) {
+//         reject(error);
+//       } else {
+//         console.log(res)
+//         resolve(res);
+//       }
+//     });
+//   });
+// }
 
 async function sendMailAndCount(data) {
   try {
-    await sendDataAndWait(data);
+    await window.electronAPI.sendData(data);
+    await window.electronAPI.handleMessage((evt,value)=>{
+      console.log(value)
+      // send.setAttribute("class","sendPending")
+      send.innerText = "Sent"
+      send.style.cursor = "not-allowed"
+      send.style.backgroundColor = "#33323590"
+      send.style.color = "rgb(36, 35, 35)"
+      send.disabled = true;
+
+    })
     // updateCount(mailCounterdiv);
     console.log("added");
   } catch (error) {
@@ -162,7 +185,7 @@ btn.addEventListener('click', async () => {
 
 
 send.addEventListener('click',async ()=>{
-  if(verifyArrays(recipientValuesGlobalArr,varsGlobalObj)==1){
+  if(verifyArrays(recipientValuesGlobalArr,varsGlobalObj,subject.value,message.value)==1){
     const sendArray = processSentArrays(recipientValuesGlobalArr,varsGlobalObj)
     console.log(sendArray)
     const data = {
@@ -173,6 +196,9 @@ send.addEventListener('click',async ()=>{
       }
       console.log(data)
       sendMailAndCount(data);
+      send.setAttribute("class","sendOk")
+      send.innerText="Sending"
+
   }
   
   

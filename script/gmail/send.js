@@ -164,7 +164,7 @@ async function mailsToday(){
   let jsonData = JSON.parse(data);
   let count =0
   for(let i=0;i<jsonData.length;i++){
-    if(jsonData[i].date===formattedDate){
+    if(jsonData[i].date.split(" ")[1]===formattedDate){
       count+=1
     }
   }

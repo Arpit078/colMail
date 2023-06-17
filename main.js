@@ -23,8 +23,8 @@ function createWindow () {
     try {
       // const res = await authorize();
       await sendMail(data.subject,data.message, data.filePath,data.xlsxPath);
-      webContents.send('message-sent', 1);
-      console.log("Mail sent successfully");
+      webContents.send('message-sent', "All Mails sent successfully");
+      // console.log("Final message ==> Mail sent successfully");
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -37,6 +37,7 @@ app.whenReady().then(() => {
   ipcMain.handle('dialog:openFile', handleFileOpen)
   ipcMain.handle('mail-count',mailsToday)
   ipcMain.handle('reminder-count',reminder)
+  // ipcMain.handle('receiveData',sendMail)
   createWindow()
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
